@@ -1,1 +1,94 @@
-<p>admin-add works!</p>
+<div class="container">
+    <h3>Add Book</h3>
+    <hr>
+    <!-- template driven form -->
+    <form name="formUser" #form="ngForm" autocomplete="off" novalidate (ngSubmit)="onSubmit(form)">
+        <!-- title -->
+        <div class="form-group">
+            <label for="name">Title</label>
+            <input name="title" #title="ngModel" class="form-control" [(ngModel)]="adminService.bookEditData.title"
+                placeholder="Enter the title here......" minlength="3" max="20"
+                pattern="^(?!\s)(?!.*\s)[A-Za-z\s]{3,20}$" required
+                [ngClass]="{'is-invalid':title.touched&&title.invalid}" autocomplete="off">
+            <!-- validation messages -->
+            <div class="validation-error" *ngIf="title.touched && title.invalid" style="color:red">
+                <div *ngIf="title.errors?.['required']">Title is invalid or required!</div>
+                <div *ngIf="title.errors?.['minlength']">Title must be at least 3 characters long
+                </div>
+                <div *ngIf="title.errors?.['maxlength']">Title not more than 20 character long</div>
+                <div *ngIf="title.errors?.['pattern']">Title cannot start with space</div>
+            </div>
+        </div>
+        <br>
+        <!-- description-->
+        <div class="form-group">
+            <label for="name">Description</label>
+            <input name="description" #description="ngModel" class="form-control"
+                [(ngModel)]="adminService.bookEditData.description" placeholder="Enter the description......" minlength="10"
+                max="30" pattern="^(?!\s)(?!.*\s)[A-Za-z\s]{3,20}$" required
+                [ngClass]="{'is-invalid':description.touched && description.invalid}" autocomplete="off">
+
+            <!-- validation messages -->
+            <div class="validation-error" *ngIf="description.touched && description.invalid" style="color: red;">
+                <div *ngIf="description.errors?.['required']">description is invalid or required!</div>
+                <div *ngIf="description.errors?.['minlength']">description must be at least 10 characters long
+                </div>
+                <div *ngIf="description.errors?.['maxlength']">description not more than 30 character long</div>
+                <div *ngIf="description.errors?.['pattern']">description cannot start with space</div>
+            </div>
+        </div>
+        <br>
+        <!-- author -->
+        <div class="form-group">
+            <label for="name">Author</label>
+            <input name="author" #author="ngModel" class="form-control" [(ngModel)]="adminService.bookEditData.author"
+                placeholder="Enter the name......" minlength="3" max="30" pattern="^(?!\s)(?!.*\s)[A-Za-z\s]{3,20}$"
+                required [ngClass]="{'is-invalid':author.touched && author.invalid}" autocomplete="off">
+
+            <!-- validation messages -->
+            <div class="validation-error" *ngIf="author.touched && author.invalid" style="color: red;">
+                <div *ngIf="author.errors?.['required']">author is invalid or required!</div>
+                <div *ngIf="author.errors?.['minlength']">author must be at least 3 characters long
+                </div>
+                <div *ngIf="author.errors?.['maxlength']">author not more than 30 character long</div>
+                <div *ngIf="author.errors?.['pattern']">author cannot start with space</div>
+            </div>
+        </div>
+        <br>
+        <!-- genre -->
+        <div class="form-group">
+            <label for="name">Genre</label>
+            <input name="genre" #genre="ngModel" class="form-control" [(ngModel)]="adminService.bookEditData.genre"
+                placeholder="Enter the genere......" minlength="5" max="30" pattern="^(?!\s)(?!.*\s)[A-Za-z\s]{3,20}$"
+                required [ngClass]="{'is-invalid':genre.touched && genre.invalid}" autocomplete="off">
+
+            <!-- validation messages -->
+            <div class="validation-error" *ngIf="genre.touched && genre.invalid" style="color: red;">
+                <div *ngIf="genre.errors?.['required']">genre is invalid or required!</div>
+                <div *ngIf="genre.errors?.['minlength']">genre must be at least 5 characters long
+                </div>
+                <div *ngIf="genre.errors?.['maxlength']">genre not more than 30 character long</div>
+                <div *ngIf="genre.errors?.['pattern']">genre cannot start with space</div>
+            </div>
+        </div>
+        <br>
+        <!-- published date -->
+        <div class="form-group">
+            <label for="dob">Date of publication</label>
+            <input type="date" name="pubslished_date" #pubslished_date="ngModel" class="form-control" [(ngModel)]="adminService.bookEditData.pubslished_date"
+                required [ngClass]="{'is-invalid':pubslished_date.touched && pubslished_date.invalid}" autocomplete="off" [min]="minDate"
+                [max]="maxDate">
+            <div class="validation-error" *ngIf="pubslished_date.touched&&pubslished_date.invalid" style="color: red;">
+                <div *ngIf="pubslished_date.errors?.['required']">
+                    pubslished_date is invalid or required!
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <button type="submit" [disabled]="!(form.valid && form.dirty)" class="btn btn-lg btn-primary form-control">
+                Submit
+            </button>
+        </div>
+    </form>
+</div>

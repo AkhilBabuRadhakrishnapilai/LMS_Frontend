@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'shared/home',pathMatch:'full'},
   {
-    path:'shared',component:SharedComponent,
-    loadChildren:()=>import('./shared/shared.module')
-    .then(x=>x.SharedModule)
+    path:'admin',component:AdminComponent,
+    loadChildren:()=>import('./admin/admin.module')
+    .then(x=>x.AdminModule)
   }
 ];
 
